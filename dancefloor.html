@@ -2,15 +2,26 @@
 <html>
   <head>
     <title>Object Dance Party</title>
+    <link href="https://fonts.googleapis.com/css?family=Notable" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <script src="lib/jquery.js"></script>
     <script src="src/dancer.js"></script>
     <script src="src/blinkyDancer.js"></script>
+    <script src="src/catDancer.js"></script>
   </head>
   <body>
+    <header class="title">Object dance party!!!</header>
     <div class="topbar">
-      <header class="title">object dance party</header>
-      <a href="#" class="addDancerButton" data-dancer-maker-function-name="makeBlinkyDancer">add a blinky dancer</a>    </div>
+      <a href="#" class="addDancerButton" data-dancer-maker-function-name="makeBlinkyDancer">add a blinky dancer</a>
+      <a href="#" class="addDancerButton" data-dancer-maker-function-name="makeCatDancer">add a cat dancer</a>
+      <a href="#" class="lineUpButton">get in line!</a>
+      <a href="#" class="stop">stop!</a>
+      <a href="#" class="hammerTime">hammer time!</a>
+    </div>
+    <audio id="meow">
+      <source preload="auto" src="src/Cat-sound-effect.mp3" type="audio/mp3">
+      <source preload="auto" src="src/Cat-sound-effect.ogg" type="audio/ogg">
+    </audio>
     <script src="src/init.js"></script>
   </body>
 </html>

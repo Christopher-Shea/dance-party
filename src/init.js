@@ -33,5 +33,27 @@ $(document).ready(function() {
     $('body').append(dancer.$node);
   });
 
+  $('.lineUpButton').on('click', function() {
+    for (let i = 0; i < window.dancers.length; i++) {
+      window.dancers[i].lineUp(i);
+    }
+  });
+
+  $('.stop').on('click', function() {
+    for (let dancer of window.dancers) {
+      dancer.stop();
+    }
+  });
+
+  $('.hammerTime').on('click', function() {
+    for (let dancer of window.dancers) {
+      dancer.hammerTime();
+    }
+  });
+
+  $('body').on('mouseenter', '.kitty', function() {
+    $('#meow')[0].play();
+  });
+
 });
 
