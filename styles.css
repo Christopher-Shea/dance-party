@@ -1,42 +1,47 @@
 body, html{
   height:100%;
-  width: 100%;
+  width:100%;
 }
 body{
   margin: 0px;
   background-color:#444;
+  font-family: 'Notable', sans-serif;
   font-size: 18px;
 }
 body, a:link, a:visited, a:active{
   color: lightblue;
 }
-.title {
-  font-size: 25;
+.title{
+  font-size: 25px;
+  letter-spacing: 2px;
+  background-color: #777;
   text-align: center;
-} 
-
-.addDancerButton{
+}
+.addDancerButton,
+.lineUpButton,
+.stop,
+.hammerTime{
   padding:5px 12px;
   float:right;
+  letter-spacing: 1px;
 }
 .topbar{
   height:32px;
   background-color: #555;
 }
-.title{
-  background-color: #777;
-}
-.dancer {
+
+.dancer{
   border:10px solid red;
   border-radius:10px;
   position:absolute;
 }
-
-.blinky {
+.blinky{
   border:10px solid blanchedalmond;
   border-radius:10px;
-  position:absolute;
 }
 .RMDancer{
-  position: absolute;
+}
+.dancer.kitty{
+  border: none;
+  height: 60px;
 }

@@ -4,13 +4,14 @@ var makeDancer = class Dancer {
     this.top = top;
     this.left = left;
     this.timeBetweenSteps = timeBetweenSteps;
+    this.timeoutID;
     this.setPosition(this.top, this.left);
     this.step();
   }
 
   step() {
-    setTimeout(this.step.bind(this), this.timeBetweenSteps);
-  }
+    this.timeoutID = setTimeout(this.step.bind(this), this.timeBetweenSteps);
+  };
 
   setPosition(top, left) {
     var styleSettings = {
@@ -18,5 +19,19 @@ var makeDancer = class Dancer {
       left: left
     };
     this.$node.css(styleSettings);
-  }
+  };
+
+  lineUp(number) {
+    this.setPosition(`${number * 25}px`, `${number * 25}px`);
+  };
+
+  stop() {
+    clearTimeout(this.timeoutID);
+  };
+
+  hammerTime() {
+    this.timeBetweenSteps = this.timeBetweenSteps / 2;
+    this.step();
+  };
+
 };
