@@ -52,6 +52,7 @@ $(document).ready(function() {
   });
 
   $('body').on('mouseenter', '.kitty', function() {
+    $('#meow')[0].volume =0.2
     $('#meow')[0].play();
   });
 
