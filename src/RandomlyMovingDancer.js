@@ -6,11 +6,10 @@ var makeRandomDancer = class RandomlyMovingDancer extends makeDancer {
     //this.step();
   }
 
-  step(hammer) {
+  step() {
     makeDancer.prototype.step.call(this);
     if(!this.linedUp){
-   
-      this.$node.animate(this.getRandomPosition(), this.timeBetweenSteps*2);
+      this.$node.animate(this.getRandomPosition(), this.timeBetweenSteps);
     }
   };
 };

@@ -5,6 +5,7 @@ body, html{
   overflow: hidden;
 }
 body{
+  box-sizing: border-box;
   margin: 0px;
   background-color:#444;
   font-family: 'Notable', sans-serif;
@@ -19,16 +20,18 @@ body, a:link, a:visited, a:active{
   background-color: #777;
   text-align: center;
 }
-.addDancerButton,
-.lineUpButton,
-.stop,
-.hammerTime{
+.button{
   padding:5px 12px;
   float:right;
   letter-spacing: 1px;
+  border: 3px solid lightblue;
+}
+.button:hover{
+  color: white;
+  background-color: lightblue;
 }
 .topbar{
-  height:32px;
+  height:40px;
   background-color: #555;
 }
 

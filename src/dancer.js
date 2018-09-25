@@ -9,23 +9,24 @@ var makeDancer = class Dancer {
       top, left
     };
     this.timeBetweenSteps = timeBetweenSteps;
+    this.hammer = false;
     this.timeoutID;
     this.currentNode = 0;
     this.nodes = [{
-      top: '5%',
-      left: '5%'
+      top: '8%',
+      left: '8%'
     },
     {
-      top: '90%',
-      left: '5%'
+      top: '92%',
+      left: '8%'
     },
     {
-      top: '90%',
-      left: '90%'
+      top: '92%',
+      left: '92%'
     },
     {
-      top: '5%',
-      left: '90%'
+      top: '8%',
+      left: '92%'
     }];
     this.setPosition(this.position);
     this.step();
@@ -48,9 +49,9 @@ var makeDancer = class Dancer {
     this.$node.css(positionObject);
   };
 
-  lineUp(rate = 5000) {
+  lineUp() {
     this.linedUp = true;
-    this.$node.animate(this.nodes[this.currentNode], rate, 'linear', this.goToNextNode.bind(this));
+    this.$node.animate(this.nodes[this.currentNode], 5000, 'linear', this.goToNextNode.bind(this));
   };
 
   goToNextNode(){
@@ -58,18 +59,19 @@ var makeDancer = class Dancer {
     this.lineUp();
   }
 
-
   breakOut() {
     this.linedUp = false;
   }
 
   stop() {
+    this.$node.toggle(true);
     clearTimeout(this.timeoutID);
   };
 
   hammerTime() {
+    this.hammer = true;
     clearTimeout(this.timeoutID);
-    this.timeBetweenSteps = this.timeBetweenSteps / 2;
+    this.timeBetweenSteps = this.timeBetweenSteps / 15;
     this.step();
   };
 

@@ -33,9 +33,13 @@ $(document).ready(function() {
     $('body').append(dancer.$node);
   });
 
+    var staggeredLineUp = function(dancerObject, time) {
+      setTimeout(dancerObject.lineUp.bind(dancerObject), time);
+    }
+
   $('.lineUpButton').on('click', function() {
     for (let i = 0; i < window.dancers.length; i++) {
-      window.dancers[i].lineUp(this.timeBetweenSteps);
+      staggeredLineUp(window.dancers[i], i * 350);
     }
   });
 
@@ -45,20 +49,43 @@ $(document).ready(function() {
     }
   });
 
-  $('.stop').on('click', function() {
-    for (let dancer of window.dancers) {
-      dancer.stop();
+  $('.startAndStop').on('click', function() {
+    if (!$(this).hasClass('stopped')) {
+      $(this).toggleClass('stopped');
+      $(this).text('start!');
+      for (let dancer of window.dancers) {
+        if (dancer.hammer === true) {
+          dancer.hammer = false;
+          dancer.timeBetweenSteps = dancer.timeBetweenSteps * 15;
+        }
+        dancer.stop();
+      }
+    } else {
+      $(this).toggleClass('stopped');
+      $(this).text('stop!');
+      for (let dancer of window.dancers) {
+        // if (dancer.hammer === true) {
+        //   dancer.timeBetweenSteps = dancer.timeBetweenSteps * 15;
+        // }
+        dancer.step();
+      }
     }
   });
 
   $('.hammerTime').on('click', function() {
+    if ($('.startAndStop').hasClass('stopped')) {
+      $('.startAndStop').toggleClass('stopped');
+      $('.startAndStop').text('stop!');
+    }
     for (let dancer of window.dancers) {
-      dancer.hammerTime();
+      if (dancer.hammer === false) {
+        dancer.hammerTime();
+      }
     }
   });
 
   $('body').on('mouseenter', '.kitty', function() {
-    $('#meow')[0].volume =0.2
+    $('#meow')[0].volume = 0.2
     $('#meow')[0].play();
   });
 
