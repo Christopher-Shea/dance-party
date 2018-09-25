@@ -41,9 +41,7 @@ body, a:link, a:visited, a:active{
   border:10px solid blanchedalmond;
   border-radius:10px;
 }
-.RMDancer{
-}
-.dancer.kitty{
+.dancer.kitty, .dancer.link {
   border: none;
   height: 60px;
 }

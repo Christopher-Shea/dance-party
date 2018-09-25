@@ -20,12 +20,12 @@ $(document).ready(function() {
     // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
+    var stepTime = (dancerMakerFunctionName === 'makeRandomDancer') ? Math.random() * (2000 - 500) + 500 :  Math.random() * 1000;
     // make a dancer with a random position
-
     var dancer = new dancerMakerFunction(
       $('body').height() * Math.random(),
       $('body').width() * Math.random(),
-      Math.random() * 1000
+      stepTime
     );
     
     window.dancers.push(dancer);
@@ -35,7 +35,7 @@ $(document).ready(function() {
 
   $('.lineUpButton').on('click', function() {
     for (let i = 0; i < window.dancers.length; i++) {
-      window.dancers[i].lineUp(i);
+      window.dancers[i].lineUp(this.timeBetweenSteps);
     }
   });
 

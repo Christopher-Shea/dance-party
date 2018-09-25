@@ -3,11 +3,30 @@ var makeDancer = class Dancer {
     this.$node = $('<span class="dancer"></span>');
     this.top = top;
     this.left = left;
+    this.linedUp = false;
+    this.gotInLine = false;
     this.position = {
       top, left
     };
     this.timeBetweenSteps = timeBetweenSteps;
     this.timeoutID;
+    this.currentNode = 0;
+    this.nodes = [{
+      top: '5%',
+      left: '5%'
+    },
+    {
+      top: '90%',
+      left: '5%'
+    },
+    {
+      top: '90%',
+      left: '90%'
+    },
+    {
+      top: '5%',
+      left: '90%'
+    }];
     this.setPosition(this.position);
     this.step();
   }
@@ -26,24 +45,19 @@ var makeDancer = class Dancer {
   };
 
   setPosition(positionObject) {
-    // var styleSettings = {
-    //   top: top,
-    //   left: left
-    // };
     this.$node.css(positionObject);
   };
 
-  lineUp(number) {
+  lineUp(rate = 5000) {
     this.linedUp = true;
-    let position = number
-    this.setPosition(`${number * 25}px`, `${number * 25}px`);
-    while (this.linedUp = true) {
-      this.$node.animate({}, 1000);
-      position = postion;
-    }
-    let newPosition = getRandomPosition();
-    setPosition(newPosition.top, newPosition.left);
+    this.$node.animate(this.nodes[this.currentNode], rate, 'linear', this.goToNextNode.bind(this));
   };
+
+  goToNextNode(){
+    this.currentNode = (this.currentNode === 3) ?  0 : this.currentNode + 1; 
+    this.lineUp();
+  }
+
 
   breakOut() {
     this.linedUp = false;
