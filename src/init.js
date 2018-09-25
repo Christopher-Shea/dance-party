@@ -38,6 +38,7 @@ $(document).ready(function() {
     }
 
   $('.lineUpButton').on('click', function() {
+    $('.background > img').fadeIn(10000);
     for (let i = 0; i < window.dancers.length; i++) {
       staggeredLineUp(window.dancers[i], i * 350);
     }

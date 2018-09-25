@@ -48,3 +48,11 @@ body, a:link, a:visited, a:active{
   border: none;
   height: 60px;
 }
+.background{
+  padding: 50px;
+  text-align: center;
+}
+.background > img{
+  width: 640px;
+  display: none;
+}
