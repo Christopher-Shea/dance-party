@@ -9,7 +9,12 @@ body{
 body, a:link, a:visited, a:active{
   color: lightblue;
 }
-.title, .addDancerButton{
+.title {
+  font-size: 25;
+  text-align: center;
+} 
+
+.addDancerButton{
   padding:5px 12px;
   float:right;
 }
@@ -20,8 +25,14 @@ body, a:link, a:visited, a:active{
 .title{
   background-color: #777;
 }
-.dancer{
+.dancer {
   border:10px solid red;
+  border-radius:10px;
+  position:absolute;
+}
+
+.blinky {
+  border:10px solid blanchedalmond;
   border-radius:10px;
   position:absolute;
 }
