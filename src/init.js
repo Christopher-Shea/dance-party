@@ -34,19 +34,40 @@ $(document).ready(function() {
   });
 
     var staggeredLineUp = function(dancerObject, time) {
+      if (dancerObject.$node.hasClass('link')) {
+        dancerObject.stop();
+      } else {
+        dancerObject.stop();
+        dancerObject.step();
+      }
       setTimeout(dancerObject.lineUp.bind(dancerObject), time);
     }
 
   $('.lineUpButton').on('click', function() {
-    $('.background > img').fadeIn(10000);
-    for (let i = 0; i < window.dancers.length; i++) {
-      staggeredLineUp(window.dancers[i], i * 350);
+    if ($('.startAndStop').hasClass('stopped')) {
+      $('.startAndStop').toggleClass('stopped');
+      $('.startAndStop').text('stop!');
+    }
+    if (!$(this).hasClass('conga')) {
+      $(this).addClass('conga');
+      $('.background > img').fadeIn(10000);
+      for (let i = 0; i < window.dancers.length; i++) {
+        staggeredLineUp(window.dancers[i], i * 350);
+      }
     }
   });
 
   $('.breakOutButton').on('click', function() {
-    for (let i = 0; i < window.dancers.length; i++) {
-      window.dancers[i].breakOut();
+    if ($('.lineUpButton').hasClass('conga')) {
+      $('.lineUpButton').toggleClass('conga');
+      $('.background > img').fadeOut(6000);
+      if ($('.startAndStop').hasClass('stopped')) {
+        $('.startAndStop').toggleClass('stopped');
+        $('.startAndStop').text('stop!');
+      }
+      for (let i = 0; i < window.dancers.length; i++) {
+        window.dancers[i].breakOut();
+      }
     }
   });
 
@@ -65,9 +86,6 @@ $(document).ready(function() {
       $(this).toggleClass('stopped');
       $(this).text('stop!');
       for (let dancer of window.dancers) {
-        // if (dancer.hammer === true) {
-        //   dancer.timeBetweenSteps = dancer.timeBetweenSteps * 15;
-        // }
         dancer.step();
       }
     }

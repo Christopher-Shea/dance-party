@@ -3,7 +3,6 @@ var makeDancer = class Dancer {
     this.$node = $('<span class="dancer"></span>');
     this.top = top;
     this.left = left;
-    this.linedUp = false;
     this.gotInLine = false;
     this.position = {
       top, left
@@ -50,27 +49,33 @@ var makeDancer = class Dancer {
   };
 
   lineUp() {
-    this.linedUp = true;
     this.$node.animate(this.nodes[this.currentNode], 5000, 'linear', this.goToNextNode.bind(this));
   };
 
   goToNextNode(){
-    this.currentNode = (this.currentNode === 3) ?  0 : this.currentNode + 1; 
-    this.lineUp();
-  }
+    this.currentNode = (this.currentNode === 3) ?  0 : this.currentNode + 1;
+    this.lineUp(); 
+  };
 
   breakOut() {
     this.linedUp = false;
+    this.gotInLine = false;
+    this.currentNode = 0;
+    this.stop();
+    this.$node.animate(this.getRandomPosition(), 3000);
+    this.step();
   }
 
   stop() {
     this.$node.toggle(true);
+    this.$node.stop();
     clearTimeout(this.timeoutID);
   };
 
   hammerTime() {
     this.hammer = true;
     clearTimeout(this.timeoutID);
+    this.$node.stop();
     this.timeBetweenSteps = this.timeBetweenSteps / 15;
     this.step();
   };
