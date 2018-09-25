@@ -2,7 +2,6 @@ var makeBlinkyDancer = class BlinkyDancer extends makeDancer {
   constructor(top, left, timeBetweenSteps) {
     super(top, left, timeBetweenSteps);
     this.$node.addClass('blinky');
-    // this.step();
   }
 
   // step() {
@@ -13,5 +12,5 @@ var makeBlinkyDancer = class BlinkyDancer extends makeDancer {
     // call the old version of step at the beginning of any call to this new version of step
     makeDancer.prototype.step.call(this);
     this.$node.toggle();
-    };
+  }
 };

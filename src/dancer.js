@@ -10,7 +10,7 @@ var makeDancer = class Dancer {
 
   step() {
     setTimeout(this.step.bind(this), this.timeBetweenSteps);
-  };
+  }
 
   setPosition(top, left) {
     var styleSettings = {
@@ -18,5 +18,5 @@ var makeDancer = class Dancer {
       left: left
     };
     this.$node.css(styleSettings);
-  };
+  }
 };
