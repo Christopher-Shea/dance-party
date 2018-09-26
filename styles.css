@@ -1,44 +1,54 @@
 /*-----general styles-----*/
 body, html{
   box-sizing: border-box;
-  height:100%;
-  width:100%;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 }
+
 body{
   min-height: 100%;
   margin: 0px;
-  background-color:#444;
+  background-color: #444;
   font-family: 'Notable', sans-serif;
 }
+
 body, a:link, a:visited, a:active{
   color: lightblue;
 }
 
+a {
+  text-decoration: none;
+}
+
 /*-----header-----*/
 .title{
-  font-size: 30px;
+  font-size: 35px;
   letter-spacing: 3px;
   color: magenta;
-  text-shadow: 1px 1px #fff600;
-  float:left;
-  padding-top: 15px;
-  padding-left: 15px;
+  text-shadow: 2px 2px #fff600;
+  float: left;
+  margin-top: 15px;
+  margin-left: 15px;
 }
+
 .button{
-  padding:5px 8px;
-  float:right;
+  margin: 2px 4px;
+  padding: 5px 5px;
+  float: right;
   font-size: 15px;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   border: 3px solid lightblue;
 }
+
 .button:hover{
   color: white;
   background-color: lightblue;
   text-shadow: 1px 1px darkblue;
 }
+
 .topbar{
-  height:40px;
+  height: 40px;
   background-color: #555;
 }
 
@@ -48,9 +58,11 @@ body, a:link, a:visited, a:active{
   content: "";
   display: table;
 }
+
 .header:after {
   clear: both;
 }
+
 .header {
   clear: both;
   *zoom: 1;
@@ -58,12 +70,14 @@ body, a:link, a:visited, a:active{
 
 /*-----dancer styles-----*/
 .dancer{
-  position:absolute;
+  position: absolute;
 }
+
 .blinky{
-  border:10px solid aquamarine;
-  border-radius:10px;
+  border: 10px solid aquamarine;
+  border-radius: 10px;
 }
+
 .dancer.kitty, .dancer.link {
   border: none;
   height: 60px;
@@ -71,12 +85,25 @@ body, a:link, a:visited, a:active{
 
 /*-----stage-----*/
 .stage{
-  padding: 50px;
   text-align: center;
   height: 100%;
   width: 100%;
+  background: url('src/dance_floor.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
+
 #bongo{
-  width: 640px;
+  margin-top: 15%;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
   display: none;
 }

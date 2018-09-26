@@ -6,7 +6,13 @@ $(document).ready(function() {
 
     // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[dancerMakerFunctionName];
-    var stepTime = (dancerMakerFunctionName === 'makeMovingDancer') ? Math.random() * (1500 - 500) + 500 :  Math.random() * (1000 - 100) + 100;
+    if (dancerMakerFunctionName === 'makeMovingDancer') {
+      var stepTime = Math.random() * (2500 - 750) + 750;
+    } else if (dancerMakerFunctionName === 'makeCatDancer') {
+      var stepTime = Math.random() * 200;
+    } else {
+      var stepTime = Math.random() * (1000 - 100) + 100;
+    }
     
     // make a dancer with a random position
     var dancer = new dancerMakerFunction(
@@ -23,11 +29,11 @@ $(document).ready(function() {
 
  $('.startAndStop').on('click', function() {
     if (!$(this).hasClass('isStopped')) {
-      if ($('.congaButton').hasClass('isConga')) {
-        $('.congaButton').toggleClass('isConga');
+      if ($('.conga').hasClass('isConga')) {
+        $('.conga').toggleClass('isConga');
       }
       $(this).toggleClass('isStopped');
-      $(this).text('Dance!');
+      $(this).text('Carry On');
       for (let dancer of window.dancers) {
         if (dancer.isHammer === true) {
           dancer.resetHammer();
@@ -36,13 +42,15 @@ $(document).ready(function() {
       }
     } else {
       $(this).toggleClass('isStopped');
-      $(this).text('Stop!');
-      if ($('.congaButton').hasClass('isConga')) {
+      $(this).text('Hold It Right There');
+      if ($('.conga').hasClass('isConga')) {
         for (let dancer of window.dancers.filter(dancer => !(dancer.$node.hasClass('link')))) {
+          dancer.stop();
           dancer.step();
         }
       } else {
         for (let dancer of window.dancers) {
+          dancer.stop();
           dancer.step();
         }
       }
@@ -52,10 +60,10 @@ $(document).ready(function() {
   $('.hammerTime').on('click', function() {
     if ($('.startAndStop').hasClass('isStopped')) {
       $('.startAndStop').toggleClass('isStopped');
-      $('.startAndStop').text('Stop!');
+      $('.startAndStop').text('Hold It Right There');
     }
-    if ($('.congaButton').hasClass('isConga')) {
-      $('.congaButton').toggleClass('isConga');
+    if ($('.conga').hasClass('isConga')) {
+      $('.conga').toggleClass('isConga');
     }
     for (let dancer of window.dancers) {
       if (dancer.isHammer === false) {
@@ -77,10 +85,10 @@ $(document).ready(function() {
       setTimeout(dancer.conga.bind(dancer), time);
     }
 
-  $('.congaButton').on('click', function() {
+  $('.conga').on('click', function() {
     if ($('.startAndStop').hasClass('isStopped')) {
       $('.startAndStop').toggleClass('isStopped');
-      $('.startAndStop').text('Stop!');
+      $('.startAndStop').text('Hold It Right There');
     }
     if (!$(this).hasClass('isConga')) {
       $(this).toggleClass('isConga');
@@ -92,23 +100,39 @@ $(document).ready(function() {
     }
   });
 
-  $('.breakOutButton').on('click', function() {
-    if ($('.congaButton').hasClass('isConga') || $('.congaButton').hasClass('canBreak')) {
-      if ($('.congaButton').hasClass('isConga')) {
-        $('.congaButton').toggleClass('isConga');
+  $('.breakOut').on('click', function() {
+    if ($('.conga').hasClass('isConga') || $('.conga').hasClass('canBreak')) {
+      if ($('.conga').hasClass('isConga')) {
+        $('.conga').toggleClass('isConga');
       }
-      if ($('.congaButton').hasClass('canBreak')) {
-        $('.congaButton').toggleClass('canBreak');
+      if ($('.conga').hasClass('canBreak')) {
+        $('.conga').toggleClass('canBreak');
       }
       $('#bongo').fadeOut(6000);
       if ($('.startAndStop').hasClass('isStopped')) {
         $('.startAndStop').toggleClass('isStopped');
-        $('.startAndStop').text('stop!');
+        $('.startAndStop').text('Hold It Right There');
       }
       for (let i = 0; i < window.dancers.length; i++) {
         window.dancers[i].breakOut();
       }
     }
+  });
+
+  $('.catMatch').on('click', function() {
+    if(!$(this).hasClass('isMatched')) {
+      $(this).toggleClass('isMatched');
+      $(this).text('Thats Gross');
+      let cats = window.dancers.filter(dancer => dancer.$node.hasClass('kitty'));
+      while (cats.length > 1) {
+        cats[0].$node.animate(cats[1].position, 4000)
+        cats = cats.slice(2);
+      }
+    } else {
+      $(this).toggleClass('isMatched');
+      $(this).text('Match Those Cats');
+    }
+
   });
 
   $('body').on('mouseenter', '.kitty', function() {

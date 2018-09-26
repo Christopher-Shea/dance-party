@@ -45,14 +45,14 @@ var makeDancer = class Dancer {
     this.isHammer = true;
     clearTimeout(this.timeoutID);
     this.$node.stop();
-    this.timeBetweenSteps = this.timeBetweenSteps / 15;
+    this.timeBetweenSteps = this.timeBetweenSteps / 12;
     this.step();
   };
 
   resetHammer(){
     this.isHammer = false;
     clearTimeout(this.timeoutID);
-    this.timeBetweenSteps = this.timeBetweenSteps * 15;
+    this.timeBetweenSteps = this.timeBetweenSteps * 12;
   };
 
   getRandomPosition() {
