@@ -4,6 +4,7 @@ var makeCatDancer = class CatDancer extends makeDancer {
     this.$node = $('<img class="dancer kitty" src="src/nicekitty.png">');
     this.angle = 0;
     this.setPosition(this.position);
+    this.step();
   }
 
   step() {

@@ -2,25 +2,12 @@ $(document).ready(function() {
   window.dancers = [];
  
   $('.addDancerButton').on('click', function(event) {
-    /* This function sets up the click handlers for the create-dancer
-     * buttons on dancefloor.html. You should only need to make one small change to it.
-     * As long as the "data-dancer-maker-function-name" attribute of a
-     * class="addDancerButton" DOM node matches one of the names of the
-     * maker functions available in the global scope, clicking that node
-     * will call the function to make the dancer.
-     */
-
-    /* dancerMakerFunctionName is a string which must match
-     * one of the dancer maker functions available in global scope.
-     * A new object of the given type will be created and added
-     * to the stage.
-     */
     var dancerMakerFunctionName = $(this).data('dancer-maker-function-name');
 
     // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[dancerMakerFunctionName];
-
-    var stepTime = (dancerMakerFunctionName === 'makeRandomDancer') ? Math.random() * (1500 - 500) + 500 :  Math.random() * (1000 - 250) + 250;
+    var stepTime = (dancerMakerFunctionName === 'makeMovingDancer') ? Math.random() * (1500 - 500) + 500 :  Math.random() * (1000 - 100) + 100;
+    
     // make a dancer with a random position
     var dancer = new dancerMakerFunction(
       $('.stage').height() * Math.random() + 80,
@@ -33,72 +20,93 @@ $(document).ready(function() {
     $('.stage').append(dancer.$node);
   });
 
-    var staggeredLineUp = function(dancerObject, time) {
-      if (dancerObject.$node.hasClass('link')) {
-        dancerObject.stop();
-      } else {
-        dancerObject.stop();
-        dancerObject.step();
-      }
-      setTimeout(dancerObject.lineUp.bind(dancerObject), time);
-    }
 
-  $('.lineUpButton').on('click', function() {
-    if ($('.startAndStop').hasClass('stopped')) {
-      $('.startAndStop').toggleClass('stopped');
-      $('.startAndStop').text('stop!');
-    }
-    if (!$(this).hasClass('conga')) {
-      $(this).addClass('conga');
-      $('.stage > img').fadeIn(10000);
-      for (let i = 0; i < window.dancers.length; i++) {
-        staggeredLineUp(window.dancers[i], i * 350);
+ $('.startAndStop').on('click', function() {
+    if (!$(this).hasClass('isStopped')) {
+      if ($('.congaButton').hasClass('isConga')) {
+        $('.congaButton').toggleClass('isConga');
       }
-    }
-  });
-
-  $('.breakOutButton').on('click', function() {
-    if ($('.lineUpButton').hasClass('conga')) {
-      $('.lineUpButton').toggleClass('conga');
-      $('.stage > img').fadeOut(6000);
-      if ($('.startAndStop').hasClass('stopped')) {
-        $('.startAndStop').toggleClass('stopped');
-        $('.startAndStop').text('stop!');
-      }
-      for (let i = 0; i < window.dancers.length; i++) {
-        window.dancers[i].breakOut();
-      }
-    }
-  });
-
-  $('.startAndStop').on('click', function() {
-    if (!$(this).hasClass('stopped')) {
-      $(this).toggleClass('stopped');
-      $(this).text('start!');
+      $(this).toggleClass('isStopped');
+      $(this).text('Dance!');
       for (let dancer of window.dancers) {
         if (dancer.isHammer === true) {
-          dancer.isHammer = false;
-          dancer.timeBetweenSteps = dancer.timeBetweenSteps * 15;
+          dancer.resetHammer();
         }
         dancer.stop();
       }
     } else {
-      $(this).toggleClass('stopped');
-      $(this).text('stop!');
-      for (let dancer of window.dancers) {
-        dancer.step();
+      $(this).toggleClass('isStopped');
+      $(this).text('Stop!');
+      if ($('.congaButton').hasClass('isConga')) {
+        for (let dancer of window.dancers.filter(dancer => !(dancer.$node.hasClass('link')))) {
+          dancer.step();
+        }
+      } else {
+        for (let dancer of window.dancers) {
+          dancer.step();
+        }
       }
     }
   });
 
   $('.hammerTime').on('click', function() {
-    if ($('.startAndStop').hasClass('stopped')) {
-      $('.startAndStop').toggleClass('stopped');
-      $('.startAndStop').text('stop!');
+    if ($('.startAndStop').hasClass('isStopped')) {
+      $('.startAndStop').toggleClass('isStopped');
+      $('.startAndStop').text('Stop!');
+    }
+    if ($('.congaButton').hasClass('isConga')) {
+      $('.congaButton').toggleClass('isConga');
     }
     for (let dancer of window.dancers) {
-      if (dancer.hammer === false) {
+      if (dancer.isHammer === false) {
         dancer.hammerTime();
+      }
+    }
+  });
+
+  var staggerConga = function(dancer, time) {
+    if (dancer.isHammer === true) {
+      dancer.resetHammer();
+    }
+    if (dancer.$node.hasClass('link')) {
+      dancer.stop();
+    } else {
+      dancer.stop();
+      dancer.step();
+    }
+      setTimeout(dancer.conga.bind(dancer), time);
+    }
+
+  $('.congaButton').on('click', function() {
+    if ($('.startAndStop').hasClass('isStopped')) {
+      $('.startAndStop').toggleClass('isStopped');
+      $('.startAndStop').text('Stop!');
+    }
+    if (!$(this).hasClass('isConga')) {
+      $(this).toggleClass('isConga');
+      $(this).toggleClass('canBreak');
+      $('#bongo').fadeIn(10000);
+      for (let i = 0; i < window.dancers.length; i++) {
+        staggerConga(window.dancers[i], i * 200);
+      }
+    }
+  });
+
+  $('.breakOutButton').on('click', function() {
+    if ($('.congaButton').hasClass('isConga') || $('.congaButton').hasClass('canBreak')) {
+      if ($('.congaButton').hasClass('isConga')) {
+        $('.congaButton').toggleClass('isConga');
+      }
+      if ($('.congaButton').hasClass('canBreak')) {
+        $('.congaButton').toggleClass('canBreak');
+      }
+      $('#bongo').fadeOut(6000);
+      if ($('.startAndStop').hasClass('isStopped')) {
+        $('.startAndStop').toggleClass('isStopped');
+        $('.startAndStop').text('stop!');
+      }
+      for (let i = 0; i < window.dancers.length; i++) {
+        window.dancers[i].breakOut();
       }
     }
   });

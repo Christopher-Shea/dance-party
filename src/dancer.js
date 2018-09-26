@@ -3,7 +3,6 @@ var makeDancer = class Dancer {
     this.$node = $('<span class="dancer"></span>');
     this.top = top;
     this.left = left;
-    this.gotInLine = false;
     this.position = {
       top, 
       left
@@ -29,11 +28,31 @@ var makeDancer = class Dancer {
       left: '92%'
     }];
     this.setPosition(this.position);
-    this.step();
   }
 
   step() {
     this.timeoutID = setTimeout(this.step.bind(this), this.timeBetweenSteps);
+  };
+
+  stop() {
+    this.$node.toggle(true);
+    clearTimeout(this.timeoutID);
+    this.$node.stop();
+    this.isHammer = false;
+  };
+
+  hammerTime() {
+    this.isHammer = true;
+    clearTimeout(this.timeoutID);
+    this.$node.stop();
+    this.timeBetweenSteps = this.timeBetweenSteps / 15;
+    this.step();
+  };
+
+  resetHammer(){
+    this.isHammer = false;
+    clearTimeout(this.timeoutID);
+    this.timeBetweenSteps = this.timeBetweenSteps * 15;
   };
 
   getRandomPosition() {
@@ -49,41 +68,29 @@ var makeDancer = class Dancer {
     this.top = positionObject.top;
     this.left = positionObject.left;
     this.position = {
-      top, 
-      left
-    };
+      top: this.top,
+      left: this.left
+    }
     this.$node.css(positionObject);
   };
 
-  lineUp() {
-    this.$node.animate(this.nodes[this.currentNode], 4000, 'linear', this.goToNextNode.bind(this));
+  conga() {
+    this.$node.animate(this.nodes[this.currentNode], 3500, 'linear', this.goToNextNode.bind(this));
   };
 
   goToNextNode(){
     this.currentNode = (this.currentNode === 3) ?  0 : this.currentNode + 1;
-    this.lineUp();
+    this.conga();
   };
 
   breakOut() {
-    this.gotInLine = false;
-    this.currentNode = 0;
+    if (this.isHammer === true) {
+      this.resetHammer();
+    }
     this.stop();
-    this.$node.animate(this.getRandomPosition(), 3000);
+    this.currentNode = 0;
+    this.$node.animate(this.position, 2500);
     this.step();
   }
-
-  stop() {
-    this.$node.toggle(true);
-    this.$node.stop();
-    clearTimeout(this.timeoutID);
-  };
-
-  hammerTime() {
-    this.isHammer = true;
-    clearTimeout(this.timeoutID);
-    this.$node.stop();
-    this.timeBetweenSteps = this.timeBetweenSteps / 15;
-    this.step();
-  };
 
 };
