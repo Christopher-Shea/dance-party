@@ -27,7 +27,7 @@ $(document).ready(function() {
   });
 
 
- $('.startAndStop').on('click', function() {
+  $('.startAndStop').on('click', function() {
     if (!$(this).hasClass('isStopped')) {
       if ($('.conga').hasClass('isConga')) {
         $('.conga').toggleClass('isConga');
@@ -82,13 +82,18 @@ $(document).ready(function() {
       dancer.stop();
       dancer.step();
     }
-      setTimeout(dancer.conga.bind(dancer), time);
-    }
+    setTimeout(dancer.conga.bind(dancer), time);
+  };
 
   $('.conga').on('click', function() {
     if ($('.startAndStop').hasClass('isStopped')) {
       $('.startAndStop').toggleClass('isStopped');
       $('.startAndStop').text('Hold It Right There');
+    }
+    if ($('.catMatch').hasClass('isMatched')) {
+      $('.catMatch').toggleClass('isMatched');
+      $('.catMatch').text('Match Those Cats');
+      $('.kitten').remove();
     }
     if (!$(this).hasClass('isConga')) {
       $(this).toggleClass('isConga');
@@ -121,7 +126,10 @@ $(document).ready(function() {
 
   $('.catMatch').on('click', function() {
     let cats = window.dancers.filter(dancer => dancer.$node.hasClass('kitty'));
-    if(!$(this).hasClass('isMatched')) {
+    if (!$(this).hasClass('isMatched')) {
+      if ($('.conga').hasClass('isConga')) {
+        $('.breakOut').trigger('click');
+      }
       $(this).toggleClass('isMatched');
       $(this).text('Thats Gross');
       while (cats.length > 1) {
@@ -140,7 +148,7 @@ $(document).ready(function() {
   });
 
   $('body').on('mouseenter', '.kitty', function() {
-    $('#meow')[0].volume = 0.2
+    $('#meow')[0].volume = 0.2;
     $('#meow')[0].play();
   });
 
