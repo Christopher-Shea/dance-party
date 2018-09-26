@@ -5,10 +5,11 @@ var makeDancer = class Dancer {
     this.left = left;
     this.gotInLine = false;
     this.position = {
-      top, left
+      top, 
+      left
     };
     this.timeBetweenSteps = timeBetweenSteps;
-    this.hammer = false;
+    this.isHammer = false;
     this.timeoutID;
     this.currentNode = 0;
     this.nodes = [{
@@ -36,8 +37,8 @@ var makeDancer = class Dancer {
   };
 
   getRandomPosition() {
-    var maxY = Math.random() * $('body').height() + 80;
-    var maxX = Math.random() * $('body').width();
+    var maxY = Math.random() * $('.stage').height() + 80;
+    var maxX = Math.random() * $('.stage').width();
     return {
       top: maxY,
       left: maxX
@@ -45,20 +46,25 @@ var makeDancer = class Dancer {
   };
 
   setPosition(positionObject) {
+    this.top = positionObject.top;
+    this.left = positionObject.left;
+    this.position = {
+      top, 
+      left
+    };
     this.$node.css(positionObject);
   };
 
   lineUp() {
-    this.$node.animate(this.nodes[this.currentNode], 5000, 'linear', this.goToNextNode.bind(this));
+    this.$node.animate(this.nodes[this.currentNode], 4000, 'linear', this.goToNextNode.bind(this));
   };
 
   goToNextNode(){
     this.currentNode = (this.currentNode === 3) ?  0 : this.currentNode + 1;
-    this.lineUp(); 
+    this.lineUp();
   };
 
   breakOut() {
-    this.linedUp = false;
     this.gotInLine = false;
     this.currentNode = 0;
     this.stop();
@@ -73,7 +79,7 @@ var makeDancer = class Dancer {
   };
 
   hammerTime() {
-    this.hammer = true;
+    this.isHammer = true;
     clearTimeout(this.timeoutID);
     this.$node.stop();
     this.timeBetweenSteps = this.timeBetweenSteps / 15;

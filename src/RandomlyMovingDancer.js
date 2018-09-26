@@ -3,13 +3,10 @@ var makeRandomDancer = class RandomlyMovingDancer extends makeDancer {
     super(top, left, timeBetweenSteps);
     this.$node = $('<img class="dancer link" src="src/LinkGif.gif">');
     this.setPosition(this.position);
-    //this.step();
   }
 
   step() {
     makeDancer.prototype.step.call(this);
-    if(!this.linedUp){
-      this.$node.animate(this.getRandomPosition(), this.timeBetweenSteps);
-    }
+    this.$node.animate(this.getRandomPosition(), this.timeBetweenSteps);
   };
 };

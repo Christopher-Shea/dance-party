@@ -20,7 +20,7 @@ $(document).ready(function() {
     // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
-    var stepTime = (dancerMakerFunctionName === 'makeRandomDancer') ? Math.random() * (2000 - 500) + 500 :  Math.random() * 1000;
+    var stepTime = (dancerMakerFunctionName === 'makeRandomDancer') ? Math.random() * (1500 - 500) + 500 :  Math.random() * (1000 - 250) + 250;
     // make a dancer with a random position
     var dancer = new dancerMakerFunction(
       $('.stage').height() * Math.random() + 80,
@@ -76,8 +76,8 @@ $(document).ready(function() {
       $(this).toggleClass('stopped');
       $(this).text('start!');
       for (let dancer of window.dancers) {
-        if (dancer.hammer === true) {
-          dancer.hammer = false;
+        if (dancer.isHammer === true) {
+          dancer.isHammer = false;
           dancer.timeBetweenSteps = dancer.timeBetweenSteps * 15;
         }
         dancer.stop();
