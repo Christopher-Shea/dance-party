@@ -1,3 +1,4 @@
+/*-----general styles-----*/
 body, html{
   box-sizing: border-box;
   height:100%;
@@ -5,24 +6,28 @@ body, html{
   overflow: hidden;
 }
 body{
-  box-sizing: border-box;
+  min-height: 100%;
   margin: 0px;
   background-color:#444;
   font-family: 'Notable', sans-serif;
-  font-size: 18px;
 }
 body, a:link, a:visited, a:active{
   color: lightblue;
 }
+
+/*-----header-----*/
 .title{
-  font-size: 25px;
+  font-size: 30px;
   letter-spacing: 2px;
-  background-color: #777;
-  text-align: center;
+  color: magenta;
+  float:left;
+  padding-top: 15px;
+  padding-left: 8px;
 }
 .button{
-  padding:5px 12px;
+  padding:5px 8px;
   float:right;
+  font-size: 15px;
   letter-spacing: 1px;
   border: 3px solid lightblue;
 }
@@ -35,6 +40,21 @@ body, a:link, a:visited, a:active{
   background-color: #555;
 }
 
+/*-----clearfix-----*/
+.header:before,
+.header:after {
+  content: "";
+  display: table;
+}
+.header:after {
+  clear: both;
+}
+.header {
+  clear: both;
+  *zoom: 1;
+}
+
+/*-----dancer styles-----*/
 .dancer{
   border:10px solid red;
   border-radius:10px;
@@ -48,11 +68,15 @@ body, a:link, a:visited, a:active{
   border: none;
   height: 60px;
 }
-.background{
+
+/*-----stage-----*/
+.stage{
   padding: 50px;
   text-align: center;
+  height: 100%;
+  width: 100%;
 }
-.background > img{
+#bongo{
   width: 640px;
   display: none;
 }

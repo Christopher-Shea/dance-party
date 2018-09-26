@@ -11,17 +11,21 @@
     <script src="src/catDancer.js"></script>
   </head>
   <body>
-    <header class="title">Object dance party!!!</header>
-    <div class="topbar">
-      <a href="#" class="addDancerButton button" data-dancer-maker-function-name="makeBlinkyDancer">add a blinky dancer</a>  
-      <a href='#' class="addDancerButton button" data-dancer-maker-function-name="makeRandomDancer">add a random dancer</a> 
-      <a href="#" class="addDancerButton button" data-dancer-maker-function-name="makeCatDancer">add a cat dancer</a>
-      <a href="#" class="lineUpButton button">get in line!</a>
-      <a href="#" class="breakOutButton button">lines are boring!</a>
-      <a href="#" class="startAndStop button">stop!</a>
-      <a href="#" class="hammerTime button">hammer time!</a>
-    </div>
-    <div class = "background">
+    <header class="header">
+      <div class="topbar">
+        <span class="title">Object dance party!!!</span>
+        <a href="#" class="addDancerButton button" data-dancer-maker-function-name="makeBlinkyDancer">add a blinky dancer</a>  
+        <a href='#' class="addDancerButton button" data-dancer-maker-function-name="makeRandomDancer">add a random dancer</a> 
+        <a href="#" class="addDancerButton button" data-dancer-maker-function-name="makeCatDancer">add a cat dancer</a>
+      </div>
+      <div class="topbar">
+        <a href="#" class="lineUpButton button">get in line!</a>
+        <a href="#" class="breakOutButton button">lines are boring!</a>
+        <a href="#" class="startAndStop button">stop!</a>
+        <a href="#" class="hammerTime button">hammer time!</a>
+      </div>
+    </header>
+    <div class ="stage">
       <img id = "bongo" src="src/BogaCat.gif"></img>
     </div>
     <audio id="meow">

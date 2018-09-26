@@ -23,14 +23,14 @@ $(document).ready(function() {
     var stepTime = (dancerMakerFunctionName === 'makeRandomDancer') ? Math.random() * (2000 - 500) + 500 :  Math.random() * 1000;
     // make a dancer with a random position
     var dancer = new dancerMakerFunction(
-      $('body').height() * Math.random(),
-      $('body').width() * Math.random(),
+      $('.stage').height() * Math.random() + 80,
+      $('.stage').width() * Math.random(),
       stepTime
     );
     
     window.dancers.push(dancer);
 
-    $('body').append(dancer.$node);
+    $('.stage').append(dancer.$node);
   });
 
     var staggeredLineUp = function(dancerObject, time) {
@@ -50,7 +50,7 @@ $(document).ready(function() {
     }
     if (!$(this).hasClass('conga')) {
       $(this).addClass('conga');
-      $('.background > img').fadeIn(10000);
+      $('.stage > img').fadeIn(10000);
       for (let i = 0; i < window.dancers.length; i++) {
         staggeredLineUp(window.dancers[i], i * 350);
       }
@@ -60,7 +60,7 @@ $(document).ready(function() {
   $('.breakOutButton').on('click', function() {
     if ($('.lineUpButton').hasClass('conga')) {
       $('.lineUpButton').toggleClass('conga');
-      $('.background > img').fadeOut(6000);
+      $('.stage > img').fadeOut(6000);
       if ($('.startAndStop').hasClass('stopped')) {
         $('.startAndStop').toggleClass('stopped');
         $('.startAndStop').text('stop!');

@@ -12,19 +12,19 @@ var makeDancer = class Dancer {
     this.timeoutID;
     this.currentNode = 0;
     this.nodes = [{
-      top: '8%',
-      left: '8%'
+      top: '12%',
+      left: '12%'
     },
     {
       top: '92%',
-      left: '8%'
+      left: '12%'
     },
     {
       top: '92%',
       left: '92%'
     },
     {
-      top: '8%',
+      top: '12%',
       left: '92%'
     }];
     this.setPosition(this.position);
@@ -36,8 +36,8 @@ var makeDancer = class Dancer {
   };
 
   getRandomPosition() {
+    var maxY = Math.random() * $('body').height() + 80;
     var maxX = Math.random() * $('body').width();
-    var maxY = Math.random() * $('body').height();
     return {
       top: maxY,
       left: maxX
