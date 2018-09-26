@@ -13,4 +13,12 @@ var makeCatDancer = class CatDancer extends makeDancer {
     this.$node.css("transform", `rotate(${this.angle}deg)`);
     };
 
+  makeKitty() {
+    var kitty = $('<img class="dancer kitten" src="src/kitten.png">');
+    let kittyPosition = {top: this.top + 15, left: this.left + 15};
+    console.log(kittyPosition);
+    kitty.css(kittyPosition);
+    $('.stage').append(kitty);
+  };
+
 };

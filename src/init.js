@@ -125,7 +125,7 @@ $(document).ready(function() {
       $(this).toggleClass('isMatched');
       $(this).text('Thats Gross');
       while (cats.length > 1) {
-        cats[0].$node.animate({top: cats[1].top + 25, left: cats[1].left + 25}, 3000);
+        cats[0].$node.animate({top: cats[1].top + 30, left: cats[1].left + 30}, 3000, cats[1].makeKitty.bind(cats[1]));
         cats = cats.slice(2);
       }
       $('.kitty').trigger('mouseenter');
@@ -135,6 +135,7 @@ $(document).ready(function() {
       for (let cat of cats) {
         cat.$node.animate(cat.position, 3000);
       }
+      $('.kitten').remove();
     }
   });
 

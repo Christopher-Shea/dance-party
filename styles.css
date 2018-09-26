@@ -69,7 +69,7 @@ a {
 }
 
 /*-----dancer styles-----*/
-.dancer{
+.dancer, .kitten{
   position: absolute;
 }
 
@@ -78,7 +78,7 @@ a {
   border-radius: 10px;
 }
 
-.dancer.kitty, .dancer.link {
+.dancer.kitty, .dancer.link, .kitten {
   border: none;
   height: 60px;
 }
@@ -106,4 +106,8 @@ a {
   left: 50%;
   transform: translate(-50%,-50%);
   display: none;
+}
+
+.kitten{
+  z-index: 2;
 }
