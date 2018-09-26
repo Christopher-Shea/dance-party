@@ -3,7 +3,6 @@ var makeCatDancer = class CatDancer extends makeDancer {
     super(top, left, timeBetweenSteps);
     this.$node = $('<img class="dancer kitty" src="src/nicekitty.png">');
     this.angle = 0;
-    this.isMatched = false;
     this.setPosition(this.position);
     this.step();
   }

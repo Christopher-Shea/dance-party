@@ -120,19 +120,22 @@ $(document).ready(function() {
   });
 
   $('.catMatch').on('click', function() {
+    let cats = window.dancers.filter(dancer => dancer.$node.hasClass('kitty'));
     if(!$(this).hasClass('isMatched')) {
       $(this).toggleClass('isMatched');
       $(this).text('Thats Gross');
-      let cats = window.dancers.filter(dancer => dancer.$node.hasClass('kitty'));
       while (cats.length > 1) {
-        cats[0].$node.animate(cats[1].position, 4000)
+        cats[0].$node.animate({top: cats[1].top + 25, left: cats[1].left + 25}, 3000);
         cats = cats.slice(2);
       }
+      $('.kitty').trigger('mouseenter');
     } else {
       $(this).toggleClass('isMatched');
       $(this).text('Match Those Cats');
+      for (let cat of cats) {
+        cat.$node.animate(cat.position, 3000);
+      }
     }
-
   });
 
   $('body').on('mouseenter', '.kitty', function() {
