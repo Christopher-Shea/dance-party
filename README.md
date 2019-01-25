@@ -1,2 +1,4 @@
-# subclass-dance-party
-This is a project I completed as a student at [hackreactor](http://hackreactor.com). This project was worked on with a pair.
+# Dance Party
+This is a project I completed while a student at [hackreactor](http://hackreactor.com). The purpose of this project was to gain a deeper understanding of inheritance patterns in JavaScript, DOM manipulation, and to HAVE FUN!
+
+To see the dance party, open dancefloor.html in the browser.
